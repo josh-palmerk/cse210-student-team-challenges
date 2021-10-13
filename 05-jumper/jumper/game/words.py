@@ -39,7 +39,7 @@ class Words():
         
         """
         with open('wordbank.txt') as f:
-        lines = f.readlines()
+            lines = f.readlines()
 
     def get_blanks(self):
         """This method turns the length of the string to underscores and addes it to the self.hidden_word"""
