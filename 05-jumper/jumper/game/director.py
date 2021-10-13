@@ -4,11 +4,11 @@ class Director():
     Director class. Runs game loop.
 
     Attributes:
-
-
-    Methods:
         is_hardmode (bool): sets gamemode
         wrong_guesses (int): number of wrong guesses
+
+    Methods:
+        
     """
     # fill in the thing above if you get the chance. gets us brownie points in grading
 

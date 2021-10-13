@@ -8,10 +8,9 @@ class Jumper():
         guess (str): the lowercase version of the player's letter guess
     
     Methods:
-        return_guess(): self explanatory
+        return_guess(): prompts for, checks, and returns guess. also updates above attributes
 
     """
-    # fill in the thing above if you get the chance. gets us brownie points in grading
 
     def __init__(self):
         """
@@ -22,14 +21,24 @@ class Jumper():
 
     def return_guess(self):
         """
-        Ensures valid user input for a one-letter lowercase hangman guess.
+        Promts user for guess and ensures valid user input for a one-letter lowercase hangman guess.
+        Also updates self.num_guesses and self.guess
 
         Args:
             self: Instance of jumper
 
         return (str): one-character lowercase alphabetical user guess
         """
-        #make sure to have .lower() on it, and try/except for good user input or test it with a while loop
+        valid = False
+        while not valid:
+            user_guess = input("Guess a letter [a-z]: ").lower().strip()
+            if user_guess.isalpha():
+                self.num_guesses += 1
+                self.guess = user_guess
+                return user_guess
+            else:
+                print("Input invalid. Please guess one (1) letter from a to z.")
+
         
 
     

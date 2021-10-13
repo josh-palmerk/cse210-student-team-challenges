@@ -19,5 +19,7 @@ class Console():
     def get_inputs(self):
         pass
 
+    # do_updates() ?
+
     def print_outputs(self):
         pass
