@@ -1,4 +1,5 @@
-
+from pathlib import Path
+from random import randint
 
 
 class Words():
@@ -17,44 +18,51 @@ class Words():
         """
         Class initializer
         """
-        self.word = ""
+        self.current_word = "" # Renamed for clarity
         self.hidden_word = [] #This is going to be a list
-
-        # maybe have 2 attributes called word and hidden_word (hidden_word holds the one with just
-        # underscores and guessed letters)
     
     def check_guess(self,guess):
         # for i, v in enumerate(self.word):
         #     if v == guess:
-        if guess in self.word:
+        if guess in self.current_word:
             return True
         else:
             return False
     
-                
 
-
-    def read_string(self):
-        """This Method gets the wordbank
-        
+    def fetch_word(self):
         """
-        with open('wordbank.txt') as f:
-            lines = f.readlines()
+        This Method gets the wordbank and assigns a random word to self.current_word
+        """
+        base_path = Path(__file__).parent
+        file_path = (base_path / "../game/wordbank-1.csv").resolve()
+
+        with open(file_path, "rt") as csvfile:
+            wordline = csvfile.read()
+            word_bank = wordline.split(", ")
+            self.current_word = word_bank[randint(0, len(word_bank))]
+        # the above with() indent should get a random word from wordbank-1.csv and save it into self.word.
+        # this is useful because if we want to expand our program to allow selection of different wordbank csv's, 
+        # we don't have to manually format them all because that's really annoying. plus you're not even 
+        # halfway done splitting up the current one
+
 
     def get_blanks(self):
-        """This method turns the length of the string to underscores and addes it to the self.hidden_word"""
+        """
+        This method turns the length of the string to underscores and addes it to the self.hidden_word
+        """
         i = 0
-        while i < len(self.word):
+        while i < len(self.current_word):
             self.hidden_word.append("_")
             i += 1
 
     def fill_blanks(self, guess):
-        """This method with an input of guess changes the blanks to the letter that was guessed
-        
         """
-        word = self.word
+        This method with an input of guess changes the blanks to the letter that was guessed
+        """
+        word = self.current_word
         word = list(word)
-        for i in range(0, len(self.word)):
+        for i in range(0, len(self.current_word)):
             if word[i] == guess:
                 self.hidden_word[i] = guess
             else:

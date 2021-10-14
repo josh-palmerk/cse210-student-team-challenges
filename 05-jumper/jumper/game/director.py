@@ -1,3 +1,5 @@
+from game.words import Words
+
 
 class Director():
     """
@@ -16,9 +18,16 @@ class Director():
         """
         Class initializer
         """
+        self.words = Words()
+
+
         self.is_hardmode = False
         self.wrong_guesses = 0
 
+    def start_game(self):
+        self.words.fetch_word()
+        print(f"{self.words.current_word}")
+    
     def get_word(self):
         pass
 
@@ -26,3 +35,4 @@ class Director():
         pass
 
     # I dont know what else this class needs. good luck
+
