@@ -68,7 +68,7 @@ class Console():
         # needs to print ascii art, hidden word, etc??
 
         #prints hidden word
-        print(*self.words.hidden_word, sep='')
+        print(*self.words.hidden_word, sep=' ')
 
         #check for number of wrong guesses, if under 5 it will print the normal jumper art,
         #if over 5 it will print the dead art.
