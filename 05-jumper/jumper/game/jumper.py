@@ -53,12 +53,12 @@ class Jumper():
             else:
                 print("Input invalid. Please guess one (1) letter from a to z.")
 
-    def is_alive(self):
-        """
-        Checks words.wrong_guesses and returns True or False.
-        """
-        if self.words.wrong_guesses >= 5:
-            return False
-        else:
-            return True
+    # def is_alive(self):
+    #     """
+    #     Checks words.wrong_guesses and returns True or False.
+    #     """
+    #     if self.words.wrong_guesses >= 5:
+    #         return False
+    #     else:
+    #         return True
         
