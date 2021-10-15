@@ -38,10 +38,9 @@ class Director():
         print(self.console.words.hidden_word)
 
         while self.keep_playing:
-            while self.alive:
-                self.get_inputs()
-                self.do_updates()
-                self.do_outputs()
+            self.get_inputs()
+            self.do_updates()
+            self.do_outputs()
 
         
         # print(f"{self.words.current_word}") # this is for debugging
@@ -82,4 +81,8 @@ class Director():
             # print(self.console.dead_jumper_art)
             print("Game over! :(")
             # would you like to play again?
+
+        if self.console.words.if_win():
+            print("\nYou Win!")
             self.keep_playing = False #remove if play again function added
+            
