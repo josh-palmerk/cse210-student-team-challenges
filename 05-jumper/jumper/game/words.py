@@ -79,9 +79,9 @@ class Words():
         word = list(word)
         for i in range(0, len(self.current_word)):
             if word[i] == guess:
-                self.hidden_word[i] = guess
-            else:
-                self.hidden_word[i] = "_"
+                print (self.hidden_word)
+                #self.hidden_word[i] = guess
+            
                 
 
     def get_word(self):

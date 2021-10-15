@@ -32,7 +32,10 @@ class Director():
     def start_game(self):
 
         print ("This is essentally a game of hang man.\nIf you guess wrong the parachuter will loose part of his parachute and you may eventually die. \nIf you complete the word without him dying, you win.")
-
+        self.words.fetch_word()
+        blank = self.words.get_blanks()
+        self.words.hidden_word
+        print (blank)
         while self.keep_playing:
             self.get_inputs()
             self.do_updates()
