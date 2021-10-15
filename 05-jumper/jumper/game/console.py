@@ -19,7 +19,17 @@ class Console():
         """
         self.words = Words()
         self.jumper = Jumper()
-
+        self.jumper_art = [
+            "  ___  ",
+            " /___\ ",
+            " \   / ",
+            "  \ /  ",
+            "   0   ",
+            "  /|\  ",
+            "  / \  ",
+            "       ",
+            "^^^^^^^",
+        ]
 
     def get_inputs(self):
         # needs to get guess and...?
