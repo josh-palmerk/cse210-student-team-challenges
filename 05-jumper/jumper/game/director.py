@@ -22,7 +22,8 @@ class Director():
         self.words = Words()
         self.console = Console()
         self.jumper = Jumper()
-        self.keep_playing = True
+        self.keep_playing = True # used for "play again?"
+        self.alive = True # used for current round alive status
         self.is_hardmode = False
         self.wrong_guesses = 0
         self.guess = ""
@@ -31,37 +32,54 @@ class Director():
 
     def start_game(self):
 
+        # put initializing imputs here. hardmode, custom word bank, etc
         print ("This is essentally a game of hang man.\nIf you guess wrong the parachuter will loose part of his parachute and you may eventually die. \nIf you complete the word without him dying, you win.")
         self.words.fetch_word()
         blank = self.words.get_blanks()
-        self.words.hidden_word
         print (blank)
+
         while self.keep_playing:
-            self.get_inputs()
-            self.do_updates()
-            self.do_outputs()
+            while self.alive:
+                self.get_inputs()
+                self.do_updates()
+                self.do_outputs()
 
         
         # print(f"{self.words.current_word}") # this is for debugging
     
     def get_inputs(self):
-        self.console.print_outputs()
+        # self.console.print_outputs()
         self.guess = self.jumper.return_guess()
-        #self.words.fetch_word()
 
 
     def do_updates(self):
-        self.words.fill_blanks(self.guess)
+        """
+        this needs to:
+            ###done### check if user guess is in current word
+            ###done### update num guesses
+            update hidden word or update ascii art (if statement)
+            update right or wrong guesses
+            ###done### check if game is over
 
+        """
+        correct = self.words.check_guess(self.jumper.guess)
 
+        if correct:
+            self.words.fill_blanks(self.guess)
+        
+        elif not correct:
+            self.words.wrong_guesses += 1
+            # update ascii art with jumper
+        
+        self.alive = self.jumper.is_alive()
 
+        
     def do_outputs(self):
-        print (self.words.hidden_word)
-        if self.jumper.is_alive() == True:
-            self.keep_playing = True
+        self.console.print_outputs()
+        if self.alive:
+            print(self.words.hidden_word)
         else:
-            self.keep_playing = False
-   
-
-    # I dont know what else this class needs. good luck
-
+            # print(self.console.dead_jumper_art)
+            print("Game over! :(")
+            # would you like to play again?
+            self.keep_playing = False #remove if play again function added

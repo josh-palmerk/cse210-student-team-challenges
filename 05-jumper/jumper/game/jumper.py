@@ -29,8 +29,7 @@ class Jumper():
     def return_guess(self):
         """
         Promts user for guess and ensures valid user input for a one-letter lowercase hangman guess.
-        Also updates self.num_gue    def is_dead():
-        sses and self.guess
+        Also updates self.num_guesses and self.guess
 
         Args:
             self: Instance of jumper
@@ -41,6 +40,7 @@ class Jumper():
         while not valid:
             user_guess = input("Guess a letter [a-z]: ").lower().strip()
             if user_guess.isalpha():
+                if len(user_guess) == 1:
                     if(self.guessed_letters[ord(user_guess)-97]):
                         print("You all ready Guessed that STUPID!")
                     else:
@@ -48,6 +48,8 @@ class Jumper():
                         self.num_guesses += 1   #Problay get rid of this
                         self.guess = user_guess
                         return user_guess
+                else:
+                    print("Please guess ONE letter.")
             else:
                 print("Input invalid. Please guess one (1) letter from a to z.")
 
