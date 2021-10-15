@@ -35,7 +35,7 @@ class Director():
         print ("This is essentally a game of hang man.\nIf you guess wrong the parachuter will loose part of his parachute and you may eventually die. \nIf you complete the word without him dying, you win.")
         self.console.words.fetch_word()
         self.console.words.get_blanks()
-        print(self.console.words.hidden_word)
+        print(*self.console.words.hidden_word, sep=' ')
 
         while self.keep_playing:
             self.get_inputs()
@@ -75,11 +75,10 @@ class Director():
         
     def do_outputs(self):
         self.console.print_outputs()
-        if self.alive:
-            print(self.console.words.hidden_word)
-        else:
+        if not self.alive:
             # print(self.console.dead_jumper_art)
             print("Game over! :(")
+            self.keep_playing = False
             # would you like to play again?
 
         if self.console.words.if_win():

@@ -81,7 +81,7 @@ class Words():
         word = list(word)
         for i in range(0, len(self.current_word)):
             if word[i] == guess:
-                print (self.hidden_word)
+                # print (*self.words.hidden_word, sep=' ')
                 self.hidden_word[i] = guess
             
                 
