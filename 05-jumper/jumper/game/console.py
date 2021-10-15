@@ -41,10 +41,6 @@ class Console():
             "^^^^^^^",
         ]
 
-    def get_inputs(self):
-        # needs to get guess and...?
-        self.jumper.return_guess()
-
     def do_updates(self):
         """
         this needs to:
