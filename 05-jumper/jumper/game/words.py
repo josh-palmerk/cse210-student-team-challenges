@@ -29,13 +29,7 @@ class Words():
         # for i, v in enumerate(self.word):
         #     if v == guess:
         
-        already_guessed = True
-        while(already_guessed):
-            if(self.guessed_letters[ord(guess)-97]):
-                print("You all ready Guessed that STUPID!")
-            else:
-                self.guessed_letters[ord(guess)-97] = 1
-                already_guessed = False
+
 
 
         if guess in self.current_word:
@@ -70,6 +64,7 @@ class Words():
         while i < len(self.current_word):
             self.hidden_word.append("_")
             i += 1
+        return self.hidden_word
 
     def fill_blanks(self, guess):
         """
@@ -79,12 +74,15 @@ class Words():
         word = list(word)
         for i in range(0, len(self.current_word)):
             if word[i] == guess:
-                print (self.hidden_word)
-                #self.hidden_word[i] = guess
+                self.hidden_word[i] = guess
             
                 
 
     def get_word(self):
         pass
+
+    def if_win(self):
+        if self.hidden_word == list(self.current_word):
+            return True
 
     # I don't know if you need all of these functions, I just wrote what was on the board
