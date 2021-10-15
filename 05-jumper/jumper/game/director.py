@@ -30,8 +30,9 @@ class Director():
     # maybe add a function that asks for hardmode? or a custom wordbank filename?
 
     def start_game(self):
-        print ("This is essentally a game of hang man.\n If you guess wrong the parachuter will loose part of his parachute and you may eventually die. \n If you complete the word without him dying, you win.")
-        self.words.get_blanks()
+
+        print ("This is essentally a game of hang man.\nIf you guess wrong the parachuter will loose part of his parachute and you may eventually die. \nIf you complete the word without him dying, you win.")
+
         while self.keep_playing:
             self.get_inputs()
             self.do_updates()

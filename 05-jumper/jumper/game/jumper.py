@@ -20,7 +20,11 @@ class Jumper():
         """
         self.num_guesses = 0
         self.guess = ""
+        self.guessed_letters = [0]
+        for i in range(0,26):
+            self.guessed_letters.append(0)
         self.words = Words()
+
 
     def return_guess(self):
         """
@@ -37,9 +41,13 @@ class Jumper():
         while not valid:
             user_guess = input("Guess a letter [a-z]: ").lower().strip()
             if user_guess.isalpha():
-                self.num_guesses += 1
-                self.guess = user_guess
-                return user_guess
+                    if(self.guessed_letters[ord(user_guess)-97]):
+                        print("You all ready Guessed that STUPID!")
+                    else:
+                        self.guessed_letters[ord(user_guess)-97] = 1
+                        self.num_guesses += 1   #Problay get rid of this
+                        self.guess = user_guess
+                        return user_guess
             else:
                 print("Input invalid. Please guess one (1) letter from a to z.")
 
