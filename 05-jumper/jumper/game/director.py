@@ -41,14 +41,14 @@ class Director():
         # print(f"{self.words.current_word}") # this is for debugging
     
     def get_inputs(self):
-        self.jumper.print_outputs()
+        self.console.print_outputs()
         self.guess = self.jumper.return_guess()
         #self.words.fetch_word()
 
 
     def do_updates(self):
         self.words.fill_blanks(self.guess)
-        
+
 
 
     def do_outputs(self):
