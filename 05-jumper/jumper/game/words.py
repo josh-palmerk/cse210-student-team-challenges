@@ -29,6 +29,7 @@ class Words():
         if guess in self.current_word:
             return True
         else:
+            self.wrong_guesses += 1
             return False
     
 
