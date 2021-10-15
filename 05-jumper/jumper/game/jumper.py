@@ -21,7 +21,7 @@ class Jumper():
         self.num_guesses = 0
         self.guess = ""
         self.guessed_letters = [0]
-        for i in range[26]:
+        for i in range(0,26):
             self.guessed_letters.append(0)
         self.words = Words()
 

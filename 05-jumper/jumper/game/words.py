@@ -23,8 +23,7 @@ class Words():
         self.wrong_guesses = 0
         self.wordbank_filename = "wordbank-1.csv" #default wordbank
         self.guessed_letters = [0]
-        for i in range[26]:
-            self.guessed_letters.append(0)
+
     
     def check_guess(self, guess):
         # for i, v in enumerate(self.word):
