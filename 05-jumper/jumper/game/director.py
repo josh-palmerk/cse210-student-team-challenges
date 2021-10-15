@@ -48,7 +48,7 @@ class Director():
 
     def do_updates(self):
         self.words.fill_blanks(self.guess)
-        
+
 
 
     def do_outputs(self):
