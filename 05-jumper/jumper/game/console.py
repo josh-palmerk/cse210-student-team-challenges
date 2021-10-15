@@ -20,11 +20,18 @@ class Console():
         self.words = Words()
         self.jumper = Jumper()
         self.jumper_art = [
-            "  ___  ",
+            "\n___  ",
             " /___\ ",
             " \   / ",
             "  \ /  ",
             "   0   ",
+            "  /|\  ",
+            "  / \  ",
+            "       ",
+            "^^^^^^^",
+        ]
+        self.dead_jumper_art = [
+            "\n X   ",
             "  /|\  ",
             "  / \  ",
             "       ",
@@ -60,4 +67,11 @@ class Console():
 
     def print_outputs(self):
         # needs to print ascii art, hidden word, etc??
-        pass
+        print(f"\n{self.words.hidden_word}")
+
+        if self.words.wrong_guesses < 5:
+            for i in range(self.words.wrong_guesses, 9):
+                print(self.jumper_art[i])
+        elif self.words.wrong_guesses == 5:
+            for i in range(5):
+                print(self.dead_jumper_art[i])
