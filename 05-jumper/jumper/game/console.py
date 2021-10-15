@@ -6,10 +6,13 @@ class Console():
     Console class. Handles user ins and outs by pulling functions from most other classes.
 
     Attributes:
-
+        jumper_art
+        dead_jumper_art
 
     Methods:
-        
+        get_inputs (?)
+        do_updates (?)
+        print_outputs()
     """
     # fill in the thing above if you get the chance. gets us brownie points in grading
 
@@ -31,7 +34,7 @@ class Console():
             "^^^^^^^",
         ]
         self.dead_jumper_art = [
-            "\n X   ",
+            "\n   X   ",
             "  /|\  ",
             "  / \  ",
             "       ",
