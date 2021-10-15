@@ -1,4 +1,4 @@
-from game.words import Words
+# from game.words import Words
 from game.console import Console
 from game.jumper import Jumper
 
@@ -19,13 +19,12 @@ class Director():
         """
         Class initializer
         """
-        self.words = Words()
+        # self.words = Words()
         self.console = Console()
         self.jumper = Jumper()
         self.keep_playing = True # used for "play again?"
         self.alive = True # used for current round alive status
         self.is_hardmode = False
-        self.wrong_guesses = 0
         self.guess = ""
 
     # maybe add a function that asks for hardmode? or a custom wordbank filename?
@@ -34,9 +33,9 @@ class Director():
 
         # put initializing imputs here. hardmode, custom word bank, etc
         print ("This is essentally a game of hang man.\nIf you guess wrong the parachuter will loose part of his parachute and you may eventually die. \nIf you complete the word without him dying, you win.")
-        self.words.fetch_word()
-        blank = self.words.get_blanks()
-        print (blank)
+        self.console.words.fetch_word()
+        self.console.words.get_blanks()
+        print(self.console.words.hidden_word)
 
         while self.keep_playing:
             while self.alive:
@@ -62,22 +61,23 @@ class Director():
             ###done### check if game is over
 
         """
-        correct = self.words.check_guess(self.jumper.guess)
+        correct = self.console.words.check_guess(self.guess)
 
         if correct:
-            self.words.fill_blanks(self.guess)
+            self.console.words.fill_blanks(self.guess)
         
         elif not correct:
-            self.words.wrong_guesses += 1
+            self.console.words.wrong_guesses += 1 # this is updated in check_guess()
             # update ascii art with jumper
         
-        self.alive = self.jumper.is_alive()
+        if self.console.words.wrong_guesses >= 5:
+            self.alive = False
 
         
     def do_outputs(self):
         self.console.print_outputs()
         if self.alive:
-            print(self.words.hidden_word)
+            print(self.console.words.hidden_word)
         else:
             # print(self.console.dead_jumper_art)
             print("Game over! :(")

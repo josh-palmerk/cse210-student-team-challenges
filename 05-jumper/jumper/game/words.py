@@ -29,19 +29,18 @@ class Words():
         # for i, v in enumerate(self.word):
         #     if v == guess:
         
-        already_guessed = True
-        while(already_guessed):
-            if(self.guessed_letters[ord(guess)-97]):
-                print("You all ready Guessed that STUPID!")
-            else:
-                self.guessed_letters[ord(guess)-97] = 1
-                already_guessed = False
+        # already_guessed = True
+        # while(already_guessed):
+        #     if(self.guessed_letters[ord(guess)-97]):
+        #         print("You all ready Guessed that STUPID!")
+        #     else:
+        #         self.guessed_letters[ord(guess)-97] = 1
+        #         already_guessed = False
 
 
         if guess in self.current_word:
             return True
         else:
-            self.wrong_guesses += 1
             return False
     
 
@@ -80,7 +79,7 @@ class Words():
         for i in range(0, len(self.current_word)):
             if word[i] == guess:
                 print (self.hidden_word)
-                #self.hidden_word[i] = guess
+                self.hidden_word[i] = guess
             
                 
 
