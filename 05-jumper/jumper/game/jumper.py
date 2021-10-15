@@ -47,7 +47,7 @@ class Jumper():
         """
         Checks words.wrong_guesses and returns True or False.
         """
-        if self.words.wrong_guesses() == 5:
+        if self.words.wrong_guesses >= 5:
             return False
         else:
             return True
