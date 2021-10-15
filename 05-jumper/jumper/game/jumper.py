@@ -38,7 +38,3 @@ class Jumper():
                 return user_guess
             else:
                 print("Input invalid. Please guess one (1) letter from a to z.")
-
-        
-
-    

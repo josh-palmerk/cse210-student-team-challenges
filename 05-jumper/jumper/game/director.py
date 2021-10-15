@@ -24,9 +24,11 @@ class Director():
         self.is_hardmode = False
         self.wrong_guesses = 0
 
+    # maybe add a function that asks for hardmode? or a custom wordbank filename?
+
     def start_game(self):
         self.words.fetch_word()
-        print(f"{self.words.current_word}")
+        # print(f"{self.words.current_word}") # this is for debugging
     
     def get_word(self):
         pass

@@ -20,8 +20,10 @@ class Words():
         """
         self.current_word = "" # Renamed for clarity
         self.hidden_word = [] #This is going to be a list
+        self.wrong_guesses = 0
+        self.wordbank_filename = "wordbank-1.csv" #default wordbank
     
-    def check_guess(self,guess):
+    def check_guess(self, guess):
         # for i, v in enumerate(self.word):
         #     if v == guess:
         if guess in self.current_word:
@@ -35,7 +37,7 @@ class Words():
         This Method gets the wordbank and assigns a random word to self.current_word
         """
         base_path = Path(__file__).parent
-        file_path = (base_path / "../game/wordbank-1.csv").resolve()
+        file_path = (base_path / f"../game/{self.wordbank_filename}").resolve()
 
         with open(file_path, "rt") as csvfile:
             wordline = csvfile.read()

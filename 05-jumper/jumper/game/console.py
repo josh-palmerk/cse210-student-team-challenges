@@ -1,3 +1,5 @@
+from game.jumper import Jumper
+from game.words import Words
 
 class Console():
     """
@@ -15,11 +17,37 @@ class Console():
         """
         Class initializer
         """
+        self.words = Words()
+        self.jumper = Jumper()
+
 
     def get_inputs(self):
-        pass
+        # needs to get guess and...?
+        self.jumper.return_guess()
 
-    # do_updates() ?
+    def do_updates(self):
+        """
+        this needs to:
+            ###done### check if user guess is in current word
+            ###done### update num guesses
+            update hidden word or update ascii art (if statement)
+            update right or wrong guesses
+            check if game is over
+
+        """
+        correct = self.words.check_guess(self.jumper.guess)
+
+        if correct:
+            #update hidden word
+            pass
+        elif not correct:
+            self.words.wrong_guesses += 1
+            # update ascii art with jumper
+        
+        # check if game_over here
+
+        
 
     def print_outputs(self):
+        # needs to print ascii art, hidden word, etc??
         pass
