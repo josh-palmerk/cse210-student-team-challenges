@@ -20,7 +20,7 @@ class Console():
         self.words = Words()
         self.jumper = Jumper()
         self.jumper_art = [
-            "\n___  ",
+            "\n  ___  ",
             " /___\ ",
             " \   / ",
             "  \ /  ",
@@ -67,7 +67,7 @@ class Console():
 
     def print_outputs(self):
         # needs to print ascii art, hidden word, etc??
-        print(f"\n{self.words.hidden_word}")
+        print(*self.words.hidden_word, sep='')
 
         if self.words.wrong_guesses < 5:
             for i in range(self.words.wrong_guesses, 9):
