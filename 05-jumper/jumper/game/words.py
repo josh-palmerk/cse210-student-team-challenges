@@ -55,7 +55,7 @@ class Words():
         with open(file_path, "rt") as csvfile:
             wordline = csvfile.read()
             word_bank = wordline.split(", ")
-            self.current_word = word_bank[randint(0, len(word_bank))]
+            self.current_word = word_bank[randint(0, len(word_bank) - 1)]
         # the above with() indent should get a random word from wordbank-1.csv and save it into self.word.
         # this is useful because if we want to expand our program to allow selection of different wordbank csv's, 
         # we don't have to manually format them all because that's really annoying. plus you're not even 

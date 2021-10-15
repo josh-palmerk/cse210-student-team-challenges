@@ -1,3 +1,5 @@
+from math import trunc
+from game.words import Words
 
 class Jumper():
     """
@@ -21,11 +23,14 @@ class Jumper():
         self.guessed_letters = [0]
         for i in range[26]:
             self.guessed_letters.append(0)
+        self.words = Words()
+
 
     def return_guess(self):
         """
         Promts user for guess and ensures valid user input for a one-letter lowercase hangman guess.
-        Also updates self.num_guesses and self.guess
+        Also updates self.num_gue    def is_dead():
+        sses and self.guess
 
         Args:
             self: Instance of jumper
@@ -45,3 +50,13 @@ class Jumper():
                         return user_guess
             else:
                 print("Input invalid. Please guess one (1) letter from a to z.")
+
+    def is_alive(self):
+        """
+        Checks words.wrong_guesses and returns True or False.
+        """
+        if self.words.wrong_guesses >= 5:
+            return False
+        else:
+            return True
+        
