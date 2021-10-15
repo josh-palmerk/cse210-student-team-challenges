@@ -22,13 +22,26 @@ class Words():
         self.hidden_word = [] #This is going to be a list
         self.wrong_guesses = 0
         self.wordbank_filename = "wordbank-1.csv" #default wordbank
+        self.guessed_letters = [0]
+
     
     def check_guess(self, guess):
         # for i, v in enumerate(self.word):
         #     if v == guess:
+        
+        already_guessed = True
+        while(already_guessed):
+            if(self.guessed_letters[ord(guess)-97]):
+                print("You all ready Guessed that STUPID!")
+            else:
+                self.guessed_letters[ord(guess)-97] = 1
+                already_guessed = False
+
+
         if guess in self.current_word:
             return True
         else:
+            self.wrong_guesses += 1
             return False
     
 

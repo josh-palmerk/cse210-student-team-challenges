@@ -70,8 +70,12 @@ class Console():
 
     def print_outputs(self):
         # needs to print ascii art, hidden word, etc??
+
+        #prints hidden word
         print(*self.words.hidden_word, sep='')
 
+        #check for number of wrong guesses, if under 5 it will print the normal jumper art,
+        #if over 5 it will print the dead art.
         if self.words.wrong_guesses < 5:
             for i in range(self.words.wrong_guesses, 9):
                 print(self.jumper_art[i])
