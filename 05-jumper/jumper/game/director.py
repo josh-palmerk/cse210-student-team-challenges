@@ -1,4 +1,3 @@
-# from game.words import Words
 from game.console import Console
 from game.jumper import Jumper
 
@@ -11,15 +10,16 @@ class Director():
         wrong_guesses (int): number of wrong guesses
 
     Methods:
-        
+        start_game()
+        get_inputs()
+        do_updates()
+        do_outputs()
     """
-    # fill in the thing above if you get the chance. gets us brownie points in grading
 
     def __init__(self):
         """
         Class initializer
         """
-        # self.words = Words()
         self.console = Console()
         self.jumper = Jumper()
         self.keep_playing = True # used for "play again?"
@@ -30,9 +30,11 @@ class Director():
     # maybe add a function that asks for hardmode? or a custom wordbank filename?
 
     def start_game(self):
-
-        # put initializing imputs here. hardmode, custom word bank, etc
-        print ("This is essentally a game of hang man.\nIf you guess wrong the parachuter will loose part of his parachute and you may eventually die. \nIf you complete the word without him dying, you win.")
+        """
+        This function initializes the game and runs the basic game loop.
+        """
+        # put initializing input loops here. hardmode, custom word bank, etc
+        print ("This is essentally a game of hangman.\nIf you guess wrong, the parachuter will lose part of his parachute and you may eventually die. \nIf you complete the word without him dying, you win.")
         self.console.words.fetch_word()
         self.console.words.get_blanks()
         print(*self.console.words.hidden_word, sep=' ')
@@ -42,23 +44,17 @@ class Director():
             self.do_updates()
             self.do_outputs()
 
-        
-        # print(f"{self.words.current_word}") # this is for debugging
     
     def get_inputs(self):
-        # self.console.print_outputs()
+        """
+        This function gets the necessary inputs for the current gamemode.
+        """
         self.guess = self.jumper.return_guess()
 
 
     def do_updates(self):
         """
-        this needs to:
-            ###done### check if user guess is in current word
-            ###done### update num guesses
-            update hidden word or update ascii art (if statement)
-            update right or wrong guesses
-            ###done### check if game is over
-
+        This function performs all updates that need to occur based on player input.
         """
         correct = self.console.words.check_guess(self.guess)
 
@@ -66,18 +62,19 @@ class Director():
             self.console.words.fill_blanks(self.guess)
         
         elif not correct:
-            self.console.words.wrong_guesses += 1 # this is updated in check_guess()
-            # update ascii art with jumper
+            self.console.words.wrong_guesses += 1 
         
         if self.console.words.wrong_guesses >= 5:
             self.alive = False
 
         
     def do_outputs(self):
+        """
+        This function prints all necessary information for the player to read.
+        """
         self.console.print_outputs()
         if not self.alive:
-            # print(self.console.dead_jumper_art)
-            print("Game over! :(")
+            print(f"Game over! :(\nThe word was: {self.console.words.current_word}\n")
             self.keep_playing = False
             # would you like to play again?
 

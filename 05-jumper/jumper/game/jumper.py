@@ -1,4 +1,3 @@
-from math import trunc
 from game.words import Words
 
 class Jumper():
@@ -8,10 +7,10 @@ class Jumper():
     Attributes:
         num_guesses (int): Current number of guesses
         guess (str): the lowercase version of the player's letter guess
+        guessed_letters (list): list of gessed letters, indexed with binary for some reason
     
     Methods:
         return_guess(): prompts for, checks, and returns guess. also updates above attributes
-
     """
 
     def __init__(self):
@@ -52,13 +51,3 @@ class Jumper():
                     print("Please guess ONE letter.")
             else:
                 print("Input invalid. Please guess one (1) letter from a to z.")
-
-    # def is_alive(self):
-    #     """
-    #     Checks words.wrong_guesses and returns True or False.
-    #     """
-    #     if self.words.wrong_guesses >= 5:
-    #         return False
-    #     else:
-    #         return True
-        

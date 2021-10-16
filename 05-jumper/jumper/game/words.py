@@ -1,45 +1,45 @@
 from pathlib import Path
 from random import randint
 
-
 class Words():
     """
     Handles all word processing and string-checking needed for a hangman game.
 
     Attributes:
-
+        current_word (str): the word to guess
+        hidden_word (list): underscores and guessed letters
+        wrong_guesses (int): number of times user has guessed incorrectly
+        wordbank_filename (str): wordbank being randomly pulled from
+        guessed_letters (list): list of guessed letters, indexed with binary for some reason
 
     Methods:
-        
+        check_guess()
+        fetch_word()
+        get_blanks()
+        fill_blanks()
+        if_win()
     """
-    # fill in the thing above if you get the chance. gets us brownie points in grading
 
     def __init__(self):
         """
         Class initializer
         """
-        self.current_word = "" # Renamed for clarity
-        self.hidden_word = [] #This is going to be a list
+        self.current_word = ""
+        self.hidden_word = []
         self.wrong_guesses = 0
         self.wordbank_filename = "wordbank-1.csv" #default wordbank
         self.guessed_letters = [0]
 
     
     def check_guess(self, guess):
-        # for i, v in enumerate(self.word):
-        #     if v == guess:
+        """
+        Determines if guess is in the current_word.
         
-
-        # already_guessed = True
-        # while(already_guessed):
-        #     if(self.guessed_letters[ord(guess)-97]):
-        #         print("You all ready Guessed that STUPID!")
-        #     else:
-        #         self.guessed_letters[ord(guess)-97] = 1
-        #         already_guessed = False
-
-
-
+        Args:
+            guess (str): a-z 1-character string
+        
+        return: bool 
+        """
         if guess in self.current_word:
             return True
         else:
@@ -57,15 +57,12 @@ class Words():
             wordline = csvfile.read()
             word_bank = wordline.split(", ")
             self.current_word = word_bank[randint(0, len(word_bank) - 1)]
-        # the above with() indent should get a random word from wordbank-1.csv and save it into self.word.
-        # this is useful because if we want to expand our program to allow selection of different wordbank csv's, 
-        # we don't have to manually format them all because that's really annoying. plus you're not even 
-        # halfway done splitting up the current one
 
 
     def get_blanks(self):
         """
         This method turns the length of the string to underscores and addes it to the self.hidden_word
+        return (str): Underscores matching length of current_word
         """
         i = 0
         while i < len(self.current_word):
@@ -73,24 +70,23 @@ class Words():
             i += 1
         return self.hidden_word
 
+
     def fill_blanks(self, guess):
         """
         This method with an input of guess changes the blanks to the letter that was guessed
+        Args:
+            guess (str): one-letter string
         """
         word = self.current_word
         word = list(word)
         for i in range(0, len(self.current_word)):
             if word[i] == guess:
-                # print (*self.words.hidden_word, sep=' ')
                 self.hidden_word[i] = guess
-            
-                
 
-    def get_word(self):
-        pass
 
     def if_win(self):
+        """
+        Determines if win condition has been met
+        """
         if self.hidden_word == list(self.current_word):
             return True
-
-    # I don't know if you need all of these functions, I just wrote what was on the board
