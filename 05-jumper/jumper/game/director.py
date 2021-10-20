@@ -79,6 +79,6 @@ class Director():
             # would you like to play again?
 
         if self.console.words.if_win():
-            print("\nYou Win!")
+            print("\nYou Win!\n")
             self.keep_playing = False #remove if play again function added
             
