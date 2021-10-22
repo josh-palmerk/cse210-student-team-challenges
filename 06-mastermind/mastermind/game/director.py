@@ -1,4 +1,3 @@
-from typing import Generator
 from game.board import Board
 from game.console import Console
 from game.guess import Guess
@@ -7,7 +6,15 @@ from game.roster import Roster
 
 class Director():
     """
-    hosts start_game and runs gameloop
+    The object for the director of a game of Mastermind. This class can officiate the game.
+
+    Methods:
+        _prepare_game()
+        start_game()
+        get_inputs()
+        do_updates()
+        do_outputs()
+
     """
     def __init__(self):
         """
@@ -22,7 +29,7 @@ class Director():
 
     def start_game(self):
         """"
-        It starts to run the game
+        This method runs _prepare_game() and handles the gameloop.
         """
         self._prepare_game()
         while self._keep_playing:
@@ -32,7 +39,7 @@ class Director():
 
     def _prepare_game(self):
         """
-        It gets the Info needed to run the game
+        This method readies the game to be played.
         """
         self._board.generate_hidden_number()
         for n in range(2):
@@ -43,7 +50,7 @@ class Director():
 
     def _get_inputs(self):
         """
-        Get the inputs needed from the user
+        This method gets the inputs needed from the user.
         """
         player = self._roster.get_current()
         valid = False
@@ -51,13 +58,15 @@ class Director():
         while not valid:
             self._guess.user_input()
             valid = self._guess.verify_input()
+            if not valid:
+                self._console.write(f"\n{player.get_name()}, that is not a valid guess.\n")
         self._guess.guess_to_list()
         player.set_guess(self._guess.get_guess())
 
 
     def _do_updates(self):
         """
-        It takes the inputs and updates the game
+        This method takes the inputs and updates the game.
         """
         player = self._roster.get_current()
         player.get_guess()
@@ -65,7 +74,7 @@ class Director():
 
     def _do_outputs(self):
         """
-        Prints the Output of the game to the screen
+        This method prints the output of the game to the terminal.
         """
         player = self._roster.get_current()
         guess = player.get_guess()
