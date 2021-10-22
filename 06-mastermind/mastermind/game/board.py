@@ -60,6 +60,7 @@ class Board():
         Returns:
             boolean
         """
+
         if guess == self.hidden:
             return True
         else:
@@ -83,4 +84,3 @@ class Board():
             return "O"
         else:
             return "*" 
-        
