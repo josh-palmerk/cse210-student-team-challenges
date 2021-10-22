@@ -32,7 +32,7 @@ class Director():
         This method runs _prepare_game() and handles the gameloop.
         """
         print("----------------------------------------------------------------")
-        print (" This is a game of MASTERMIND, a random 4 digit number will be generated. \n What you are trying to do is guess that number.\n An X will be printed if you guess the right number in the right spot.\n An O will be printed if that number is in the generated number but not in the right spot. \n And a * will be printed in the spot if the number is not in the hidden number. ")
+        print(" This is a game of MASTERMIND, a random 4 digit number will be generated. \n What you are trying to do is guess that number.\n An X will be printed if you guess the right number in the right spot.\n An O will be printed if that number is in the generated number but not in the right spot. \n And a * will be printed in the spot if the number is not in the hidden number. ")
         print("----------------------------------------------------------------")
         self._prepare_game()
         while self._keep_playing:
@@ -90,5 +90,3 @@ class Director():
             print(f"\n{name} won!")
             self._keep_playing = False
         self._roster.next_player()
-
-        
