@@ -31,6 +31,7 @@ class Board():
 
         for i in range(0, 4):
             hint.append(self._compare_guess_to_hidden(i, guess))         
+
         return hint
 
     def generate_hidden_number(self):
