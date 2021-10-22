@@ -66,7 +66,7 @@ class Board():
             return False
         
 
-    def compare_guess_to_hidden(self,i):
+    def _compare_guess_to_hidden(self,i):
         """
         Compares the guess to the hidden number
 
