@@ -17,11 +17,11 @@ class Board():
         """
         #self._piles = [] # list of nums
         self._hidden_number = 0
-        self.guess = self.guess.guess_to_list()
+        self.guess = ""
         self.hidden = list(self._hidden_number)
     
 
-    def return_hint(self):
+    def return_hint(self, guess):
         """returns the new hint from guess
         
         Args:
@@ -31,6 +31,7 @@ class Board():
             constructed hint
         """
         hint = []
+        self.guess = guess
 
         for i in range(0, 3):
             hint.append(self.compare_guess_to_hidden(i))         
@@ -49,7 +50,7 @@ class Board():
         self._hidden_number = range(random.randint(1000, 9999))
         return self._hidden_number
 
-    def is_the_correct_guess(self):
+    def is_the_correct_guess(self, guess):
         """
         Checks if the guess is the same as the hidden number
 
@@ -60,13 +61,13 @@ class Board():
         Returns:
             boolean
         """
-        if self.guess == list(self._hidden_number):
+        if guess == list(self._hidden_number):
             return True
         else:
             return False
         
 
-    def compare_guess_to_hidden(self,i):
+    def compare_guess_to_hidden(self, i):
         """
         Compares the guess to the hidden number
 
@@ -78,7 +79,7 @@ class Board():
         """
         if self.guess[i] == self.hidden[i]:
             return "X"
-        elif self.guess[i] == self.hidden[0] or self.guess [i] == self.hidden[1] or self.guess [i] == self.hidden[2] or self.guess [i] == self.hidden[3]:
+        elif self.guess[i] == self.hidden[0] or self.guess[i] == self.hidden[1] or self.guess[i] == self.hidden[2] or self.guess[i] == self.hidden[3]:
             return "O"
         else:
             return "*" 
