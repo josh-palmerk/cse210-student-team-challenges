@@ -30,7 +30,7 @@ class Board():
         # self.guess = guess
 
         for i in range(0, 4):
-            hint.append(self.compare_guess_to_hidden(i, guess))         
+            hint.append(self._compare_guess_to_hidden(i, guess))         
         return hint
 
     def generate_hidden_number(self):
@@ -65,7 +65,8 @@ class Board():
             return False
         
 
-    def compare_guess_to_hidden(self, i, guess):
+    def _compare_guess_to_hidden(self, i, guess):
+    
         """
         Compares the guess to the hidden number
 
