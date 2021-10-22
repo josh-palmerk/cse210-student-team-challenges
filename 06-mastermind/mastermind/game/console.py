@@ -44,5 +44,14 @@ class Console:
         """
         print(text)
 
+    def print_hint(self, hint):
+        """Prints the list form of hint in a formatted way
+        
+        Args:
+            self (console): An instance of Console."""
+            
+        print(*hint, sep= "")
+
+
 
 # WARNING::: ripped directly fron nim ^

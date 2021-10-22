@@ -4,62 +4,82 @@ import random
 
 class Board():
     """
-    
+    Stereotype:
+        Information Holder
+
+    This class controls the board
+    It generates a hidden number and checks that hidden number based upon a guess
+    Returns the hint to player
     """
     def __init__(self):
         """
         Class initializer
         """
         #self._piles = [] # list of nums
-        self.hidden_number
+        self._hidden_number = 0
+        self.guess = self.guess.guess_to_list()
+        self.hidden = list(self._hidden_number)
+    
 
-    def apply(self, move):
-        #self._piles[move.get_pile()] = max(0, self._piles[move.get_pile()] - move.get_stones())
-        pass
-
-
-    def is_empty(self):
-        # if sum(self._piles) == 0:
-        #     return True
-        # else:
-        #     return False
-        pass
-
-    def to_string(self):
-        # string_list = []
-        # for i in range(len(self._piles)):
-        #     string_list.append(f"{i}:  " + ("O " * self._piles[i]))
-        # string = "\n".join(string_list)
-        # return string
-        pass
-
-    def check_hidden_number(self):
-
-        pass
-
-    def apply_guess_to_player(self, guess):
-        """reference guess in apply guess"""
-        guess = list(guess)
-        hidden = self.hidden_number
-        hidden = list(hidden)
+    def return_hint(self):
+        """returns the new hint from guess
+        
+        Args:
+         self (board) is and instance of board
+         
+        Returns:
+            constructed hint
+        """
         hint = []
 
         for i in range(0, 3):
-            if guess[i] == hidden[i]:
-                hint.append ("0") 
-            elif guess[i] == hidden[0] or guess [i] == hidden[1] or guess [i] == hidden[2] or guess [i] == hidden[3]:
-                hint.append ("X")
+            hint.append(self.compare_guess_to_hidden(i))         
         return hint
 
-    def _generate_hidden_number(self):
-        self.hidden_number = range(random.randint(1000, 9999))
-        return self.hidden_number
+    def generate_hidden_number(self):
+        """
+        Creates the private hidden number
 
-    def is_the_correct_guess(self, guess):
-        if guess == self.hidden_number:
+        Args:
+         self (board) is and instance of board
+         
+        Returns:
+            Hidden number
+        """
+        self._hidden_number = range(random.randint(1000, 9999))
+        return self._hidden_number
+
+    def is_the_correct_guess(self):
+        """
+        Checks if the guess is the same as the hidden number
+
+
+        Args:
+         self (board) is and instance of board
+         
+        Returns:
+            boolean
+        """
+        if self.guess == list(self._hidden_number):
             return True
+        else:
+            return False
         
 
-    def compare_guess(self, guess):
-        
+    def compare_guess_to_hidden(self,i):
+        """
+        Compares the guess to the hidden number
+
+        Args:
+         self (board) is and instance of board
+         
+        Returns:
+            Symbol for constructing hint
+        """
+        if self.guess[i] == self.hidden[i]:
+            return "X"
+        elif self.guess[i] == self.hidden[0] or self.guess [i] == self.hidden[1] or self.guess [i] == self.hidden[2] or self.guess [i] == self.hidden[3]:
+            return "O"
+        else:
+            return "*" 
         
