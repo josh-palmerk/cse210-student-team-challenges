@@ -11,7 +11,7 @@ class Board():
         Class initializer
         """
         #self._piles = [] # list of nums
-        #self._prepare()
+        self.hidden_number
 
     def apply(self, move):
         #self._piles[move.get_pile()] = max(0, self._piles[move.get_pile()] - move.get_stones())
@@ -33,7 +33,33 @@ class Board():
         # return string
         pass
 
-    def _prepare(self):
-        # for i in range(random.randint(2, 5)):
-        #     self._piles.append(random.randint(1,9))
+    def check_hidden_number(self):
+
         pass
+
+    def apply_guess_to_player(self, guess):
+        """reference guess in apply guess"""
+        guess = list(guess)
+        hidden = self.hidden_number
+        hidden = list(hidden)
+        hint = []
+
+        for i in range(0, 3):
+            if guess[i] == hidden[i]:
+                hint.append ("0") 
+            elif guess[i] == hidden[0] or guess [i] == hidden[1] or guess [i] == hidden[2] or guess [i] == hidden[3]:
+                hint.append ("X")
+        return hint
+
+    def _generate_hidden_number(self):
+        self.hidden_number = range(random.randint(1000, 9999))
+        return self.hidden_number
+
+    def is_the_correct_guess(self, guess):
+        if guess == self.hidden_number:
+            return True
+        
+
+    def compare_guess(self, guess):
+        
+        
