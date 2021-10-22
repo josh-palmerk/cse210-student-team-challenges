@@ -44,7 +44,7 @@ class Board():
         Returns:
             Hidden number
         """
-        self._hidden_number = range(random.randint(1000, 9999))
+        self._hidden_number = random.randint(1000, 9999)
         hidden = self._hidden_number
         self.hidden = list(str(hidden))
         return self.hidden
