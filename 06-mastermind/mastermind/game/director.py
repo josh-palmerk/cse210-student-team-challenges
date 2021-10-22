@@ -47,6 +47,7 @@ class Director():
         """
         player = self._roster.get_current()
         valid = False
+        self._console.write(f"{player.get_name()}'s turn:")
         while not valid:
             self._guess.user_input()
             valid = self._guess.verify_input()
@@ -70,5 +71,12 @@ class Director():
         guess = player.get_guess()
         hint = self._board.return_hint(guess)
         self._console.print_hint(hint)
+
+        if self._board.is_the_correct_guess(player.get_guess()):
+            winner = self._roster.get_current()
+            name = winner.get_name()
+            print(f"\n{name} won!")
+            self._keep_playing = False
+        self._roster.next_player()
 
         
