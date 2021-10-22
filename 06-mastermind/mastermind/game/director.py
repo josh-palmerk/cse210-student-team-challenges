@@ -1,3 +1,4 @@
+from typing import Generator
 from game.board import Board
 from game.console import Console
 from game.guess import Guess
@@ -34,22 +35,38 @@ class Director():
         """
         It gets the Info needed to run the game
         """
-        pass
+        for n in range(2):
+            name = self._console.read(f"Enter a name for player {n + 1}: ")
+            player = Player(name)
+            self._roster.add_player(player)
+        
 
     def _get_inputs(self):
         """
         Get the inputs needed from the user
         """
-        pass
+        player = self._roster.get_current()
+        valid = False
+        while not valid:
+            self._guess.user_input()
+            valid = self._guess.verify_input()
+        self._guess.guess_to_list()
+        player.set_guess(self._guess.get_guess)
+
 
     def _do_updates(self):
         """
         It takes the inputs and updates the game
         """
-        pass
+        player = self._roster.get_current()
+        player.get_guess()
+
 
     def _do_outputs(self):
         """
         Prints the Output of the game to the screen
         """
+        player = self._roster.get_current()
+        self._board.return_hint(player.get_guess())
+
         pass
