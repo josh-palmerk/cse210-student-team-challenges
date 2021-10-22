@@ -16,7 +16,7 @@ class Director():
         self._board = Board()
         self._console = Console()
         self._keep_playing = True
-        self._player = Player()
+        # self._player = Player()
         self._roster = Roster()
         self._guess = Guess()
 

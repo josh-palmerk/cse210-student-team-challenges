@@ -18,7 +18,7 @@ class Board():
         #self._piles = [] # list of nums
         self._hidden_number = 0
         self.guess = ""
-        self.hidden = list(self._hidden_number)
+        self.hidden = []
     
 
     def return_hint(self, guess):
@@ -48,7 +48,8 @@ class Board():
             Hidden number
         """
         self._hidden_number = range(random.randint(1000, 9999))
-        return self._hidden_number
+        self.hidden = list(str(self._hidden_number))
+        return self.hidden
 
     def is_the_correct_guess(self, guess):
         """
