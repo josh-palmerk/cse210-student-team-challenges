@@ -1,7 +1,5 @@
 import random
 
-# TODO: Define the Board class here
-
 class Board():
     """
     Stereotype:
@@ -15,9 +13,7 @@ class Board():
         """
         Class initializer
         """
-        #self._piles = [] # list of nums
         self._hidden_number = 0
-        self.guess = ""
         self.hidden = []
     
 
@@ -31,10 +27,11 @@ class Board():
             constructed hint
         """
         hint = []
-        self.guess = guess
+        # self.guess = guess
 
-        for i in range(0, 3):
-            hint.append(self._compare_guess_to_hidden(i))         
+        for i in range(0, 4):
+            hint.append(self._compare_guess_to_hidden(i, guess))         
+
         return hint
 
     def generate_hidden_number(self):
@@ -48,7 +45,8 @@ class Board():
             Hidden number
         """
         self._hidden_number = range(random.randint(1000, 9999))
-        self.hidden = list(str(self._hidden_number))
+        hidden = self._hidden_number
+        self.hidden = list(str(hidden))
         return self.hidden
 
     def is_the_correct_guess(self, guess):
@@ -68,8 +66,7 @@ class Board():
             return False
         
 
-
-    def _compare_guess_to_hidden(self,i):
+    def _compare_guess_to_hidden(self, i, guess):
     
         """
         Compares the guess to the hidden number
@@ -80,9 +77,9 @@ class Board():
         Returns:
             Symbol for constructing hint
         """
-        if self.guess[i] == self.hidden[i]:
+        if guess[i] == self.hidden[i]:
             return "X"
-        elif self.guess[i] == self.hidden[0] or self.guess[i] == self.hidden[1] or self.guess[i] == self.hidden[2] or self.guess[i] == self.hidden[3]:
+        elif guess[i] == self.hidden[0] or guess[i] == self.hidden[1] or guess[i] == self.hidden[2] or guess[i] == self.hidden[3]:
             return "O"
         else:
             return "*" 

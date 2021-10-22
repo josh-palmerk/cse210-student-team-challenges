@@ -16,7 +16,6 @@ class Director():
         self._board = Board()
         self._console = Console()
         self._keep_playing = True
-        # self._player = Player()
         self._roster = Roster()
         self._guess = Guess()
 
@@ -35,6 +34,7 @@ class Director():
         """
         It gets the Info needed to run the game
         """
+        self._board.generate_hidden_number()
         for n in range(2):
             name = self._console.read(f"Enter a name for player {n + 1}: ")
             player = Player(name)
@@ -51,7 +51,7 @@ class Director():
             self._guess.user_input()
             valid = self._guess.verify_input()
         self._guess.guess_to_list()
-        player.set_guess(self._guess.get_guess)
+        player.set_guess(self._guess.get_guess())
 
 
     def _do_updates(self):
@@ -67,6 +67,8 @@ class Director():
         Prints the Output of the game to the screen
         """
         player = self._roster.get_current()
-        self._board.return_hint(player.get_guess())
+        guess = player.get_guess()
+        hint = self._board.return_hint(guess)
+        self._console.print_hint(hint)
 
-        pass
+        
