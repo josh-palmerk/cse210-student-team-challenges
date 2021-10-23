@@ -51,7 +51,3 @@ class Console:
             self (console): An instance of Console."""
             
         print(*hint, sep= "")
-
-
-
-# WARNING::: ripped directly fron nim ^

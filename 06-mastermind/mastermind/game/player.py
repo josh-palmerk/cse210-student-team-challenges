@@ -8,6 +8,7 @@ class Player:
         _name (string): The player's name.
         _guess (Guess): The player's last guess.
     """
+
     def __init__(self, name):
         """The class constructor.
         
@@ -15,7 +16,8 @@ class Player:
             self (Player): an instance of Player.
         """
         self._name = name
-        self._guess = None
+        self._guess = ["-", "-", "-", "-"]
+        self._prev_hint = ["-", "-", "-", "-"]
         
     def get_guess(self):
         """Returns the player's last guess (an instance of guess). If the player 
@@ -43,4 +45,20 @@ class Player:
         """
         self._guess = guess
 
-# WARNING::: ripped directly fron nim ^
+    def set_prev_hint(self, prev_hint):
+        """Sets the player's last hint to the given parameter.
+
+        Args:
+            self (Player): an instance of Player.
+            prev_hint
+        """
+        self._prev_hint = prev_hint
+
+    def get_prev_hint(self):
+        """Returns the player's last hint. If the player 
+        hasn't guessed yet this method returns None.
+
+        Args:
+            self (Player): an instance of Player.
+        """
+        return self._prev_hint

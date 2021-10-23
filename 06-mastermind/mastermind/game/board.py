@@ -27,7 +27,6 @@ class Board():
             constructed hint
         """
         hint = []
-        # self.guess = guess
 
         for i in range(0, 4):
             hint.append(self._compare_guess_to_hidden(i, guess))         
