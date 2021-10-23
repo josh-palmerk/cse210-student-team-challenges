@@ -37,7 +37,7 @@ class Director():
         self._prepare_game()
         while self._keep_playing:
             self._get_inputs()
-            self._do_updates()
+            #self._do_updates()
             self._do_outputs()
 
     def _prepare_game(self):
@@ -68,12 +68,12 @@ class Director():
         player.set_guess(self._guess.get_guess())
 
 
-    def _do_updates(self):
-        """
-        This method takes the inputs and updates the game.
-        """
-        player = self._roster.get_current()
-        player.get_guess()
+    # def _do_updates(self):
+    #     """
+    #     This method takes the inputs and updates the game.
+    #     """
+    #     player = self._roster.get_current()
+    #     player.get_guess()
 
 
     def _do_outputs(self):
@@ -91,6 +91,9 @@ class Director():
         print(player1.get_name(), ": ", *player1.get_guess(), "  ", *player1.get_prev_hint(), sep="")
         print(player2.get_name(), ": ", *player2.get_guess(), "  ", *player2.get_prev_hint(), sep="")
         self._console.write("---------------------------------------")
+        if (current_player.get_prev_hint() == (['*', '*', '*', '*'])):
+            self._console.write("Ha Ha, you got it all wrong!")
+
 
         if self._board.is_the_correct_guess(current_player.get_guess()):
             winner = self._roster.get_current()
