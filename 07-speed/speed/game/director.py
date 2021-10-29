@@ -29,3 +29,34 @@ class Director():
         self._keep_playing = True
         self._score_board = ScoreBoard()
         # add more attributes and instances based on game needs
+
+    def start_game(self):
+        """Starts the game loop to control the sequence of play.
+        
+        Args:
+            self (Director): an instance of Director.
+        """
+        print("Starting game...")
+        self._output_service.open_window("Speed")
+
+        while self._keep_playing:
+            self._get_inputs()
+            self._do_updates()
+            self._do_outputs()
+
+            if self._input_service.window_should_close():
+                self._keep_playing = False
+
+        print("Game over!")
+
+    def _get_inputs(self):
+        key_press = self._input_service.get_key_press()
+        # add key to current buffer/workbank thingy
+
+    def _do_updates(self):
+        """
+        """
+        pass
+
+    def _do_outputs(self):
+        pass
