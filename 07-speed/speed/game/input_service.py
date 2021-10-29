@@ -43,13 +43,11 @@ class InputService:
 
         # return self._current
 
-    
-    """
-    so right here we need a function to pull keyboard inputs for all letters
-    raylibpy.get_key_pressed()
-
-    """
-
+    def get_key_press(self):
+        """
+        we probably need to filter the keys to be only regular letters
+        """
+        return raylibpy.get_key_pressed()
 
     def is_left_pressed(self):
         """
