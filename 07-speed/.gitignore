@@ -3,4 +3,3 @@
 
 # ignoring main so non-windows machines don't get screwed up with the windows
 # solution for raylib not working.
-speed/__main__.py
