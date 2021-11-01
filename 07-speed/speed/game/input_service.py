@@ -47,7 +47,14 @@ class InputService:
         """
         we probably need to filter the keys to be only regular letters
         """
-        return raylibpy.get_key_pressed()
+        key_int = raylibpy.get_key_pressed()
+
+        key_string = None
+
+        if key_int != -1:
+            key_string = chr(key_int)
+        
+        return key_string
 
     def is_left_pressed(self):
         """
