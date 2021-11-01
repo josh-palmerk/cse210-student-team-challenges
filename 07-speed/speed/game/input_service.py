@@ -3,15 +3,14 @@ from game.point import Point
 import raylibpy
 
 class InputService:
-    """Detects player input. The responsibility of the class of objects is
-    to detect player keypresses and translate them into a point representing
-    a direction (or velocity).
+    """
+    we need to change this to get keys and maybe pput them on the box on the bottom? or maybe that's an outputservice
 
     Stereotype: 
         Service Provider
 
     Attributes:
-        _current (Point): The last direction that was pressed.
+        
     """
 
     def __init__(self):
@@ -20,7 +19,7 @@ class InputService:
         Args:
             self (InputService): An instance of InputService.
         """
-        self._current = Point(1, 0)
+        # self._current = Point(1, 0)
         
     def get_direction(self):
         """Gets the selected direction. If one hasn't been selected the last 
@@ -32,16 +31,30 @@ class InputService:
         Returns:
             Point: The selected direction.
         """
-        if self.is_left_pressed():
-            self._current = Point(-10, 0)
-        elif self.is_right_pressed():
-            self._current = Point(10, 0)
-        elif self.is_up_pressed():
-            self._current = Point(0, -10)
-        elif self.is_down_pressed():
-            self._current = Point(0, 10)
+        
+        # if self.is_left_pressed():
+        #     self._current = Point(-10, 0)
+        # elif self.is_right_pressed():
+        #     self._current = Point(10, 0)
+        # elif self.is_up_pressed():
+        #     self._current = Point(0, -10)
+        # elif self.is_down_pressed():
+        #     self._current = Point(0, 10)
 
-        return self._current
+        # return self._current
+
+    def get_key_press(self):
+        """
+        we probably need to filter the keys to be only regular letters
+        """
+        key_int = raylibpy.get_key_pressed()
+
+        key_string = None
+
+        if key_int != -1:
+            key_string = chr(key_int)
+        
+        return key_string
 
     def is_left_pressed(self):
         """
