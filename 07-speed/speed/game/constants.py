@@ -9,3 +9,6 @@ LIBRARY = open(PATH + "/words.txt").read().splitlines()
 
 DEFAULT_WORD_HEIGHT = 20
 DEFAULT_WORD_SPEED = -1
+
+STARTING_SPAWN_RATE = 30
+SPAWNRATE_FACTOR = 1000
