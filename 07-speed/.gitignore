@@ -1,5 +1,6 @@
 # Any file with the dll file extention
 *.dll
+speed/libraylib.so.2.0.0
 
 # ignoring main so non-windows machines don't get screwed up with the windows
 # solution for raylib not working.
