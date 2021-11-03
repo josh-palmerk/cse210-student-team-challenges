@@ -77,18 +77,21 @@ class Director():
         $$$ add points and remove word if typed
         $$$ spawn new words
         """
-        
-        for i in range(len(self._current_words) - 1):
-            word = self._current_words[i]
+        q = 0
+        for i in range(len(self._current_words)):
+            word = self._current_words[q]
             if self._is_dead(word):
                 self._score_board.add_points(-word.get_points())
-                self._current_words.pop(i)
+                self._current_words.pop(q)
+                q -= 1
                 if self._score_board.get_points() <= 0:
                     self._keep_playing = False
             if self._is_contained(word):
                 self._score_board.add_points(word.get_points()) 
-                self._current_words.pop(i)
+                self._current_words.pop(q)
+                q -= 1
                 self._buffer.clear_buffer()
+            q += 1
         
         for word in self._current_words:
             word.move_next()
