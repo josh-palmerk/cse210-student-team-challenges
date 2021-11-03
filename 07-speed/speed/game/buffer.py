@@ -5,10 +5,11 @@ import game.constants as constants
 class Buffer(Actor):
     """ This is an information class. This holds the inputs from the user and displyas it """
     def __init__(self):
+        super().__init__()
         self._typed_string = ""
-        self.set_height(constants.MAX_Y - constants.DEFAULT_WORD_HEIGHT)
-        self.set_width(constants.MAX_X) 
-        self.set_position(Point((constants.MAX_X), (0)))
+        self.set_height(constants.DEFAULT_WORD_HEIGHT)
+        self.set_width(constants.DEFAULT_FONT_SIZE * len(self._typed_string)) 
+        self.set_position(Point(5, 0))
 
     def clear_buffer(self):
         """Clears the Buffer List"""
@@ -20,4 +21,5 @@ class Buffer(Actor):
 
     def add_character_to_buffer(self, character):
         """Changes the typed string to be able to output """
-        self._typed_string = (self._typed_string + character)
+        if character is not None:
+            self._typed_string = (self._typed_string + character)

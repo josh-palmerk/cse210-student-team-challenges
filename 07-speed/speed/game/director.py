@@ -1,4 +1,5 @@
 from random import randint
+from pathlib import Path
 import raylibpy
 
 from game import constants
@@ -6,6 +7,8 @@ from game import constants
 from game.score_board import ScoreBoard
 
 from game.word import Word
+
+from game.buffer import Buffer
 
 class Director():
     """A code template for a person who directs the game. The responsibility of 
@@ -31,6 +34,7 @@ class Director():
         self._output_service = output_service
         self._keep_playing = True
         self._score_board = ScoreBoard()
+        self._buffer = Buffer()
         self._word_bank = [] # words.txt
         self._current_words = [] # onscreen words
         # add more attributes and instances based on game needs
@@ -45,7 +49,7 @@ class Director():
 
         self._get_wordbank()
 
-        self._output_service.open_window("Speed")
+        self._output_service.open_window("Speed")#self._output_service.open_window("Speed")
 
         self._starting_wordspawn()
 
@@ -61,7 +65,7 @@ class Director():
 
     def _get_inputs(self):
         key_press = self._input_service.get_key_press()
-        # add key to current buffer
+        self._buffer.add_character_to_buffer(key_press)
 
     def _do_updates(self):
         """
@@ -73,23 +77,33 @@ class Director():
         for i in range(len(self._current_words)):
             word = self._current_words[i]
             if self._is_dead(word):
-                self._score_board._points -= word._get_points()
+                self._score_board._points -= word.get_points()
             if self._is_contained(word):
-                self._score_board._points += word._get_points()
+                self._score_board._points += word.get_points()
                 self._current_words.pop(i)
-                # reset buffer
+                self._buffer.clear_buffer()
         
         self._random_spawn()
 
 
     def _do_outputs(self):
-        pass
+        """uh"""
+        self._output_service.clear_screen() #remove this line for free epilepsy
+        # TODO: Uncomment this when you have finished the food class
+        for word in self._current_words:
+            self._output_service.draw_actor(word)
+        #self._output_service.draw_actors(self._current_words.get_all())
+        self._output_service.draw_actor(self._score_board)
+        self._output_service.draw_actor(self._buffer)
+        self._output_service.flush_buffer()
 
     def _spawn_word(self):
         """
-        adds random instance of Word to _current_words
+        adds random instance of Word to (constants.MAX_X)_current_words
         """
-        new_word =  Word(self._word_bank[randint(0, len(self._word_bank))])
+        random_word_index = randint(0, len(self._word_bank))
+        random_word = self._word_bank[random_word_index]
+        new_word = Word(random_word)
         self._current_words.append(new_word)
 
     def _starting_wordspawn(self):
@@ -103,7 +117,9 @@ class Director():
             self._spawn_word()
 
     def _get_wordbank(self):
-        with open("words.txt") as infile:
+        base_path = Path(__file__).parent
+        file_path = (base_path / f"../game/words.txt").resolve()
+        with open(file_path, "rt") as infile:
             for line in infile:
                 self._word_bank.append(line.strip())
 
@@ -123,5 +139,8 @@ class Director():
         Takes class not string
         """
         string = word.get_word()
-        # if string in buffer return true
-        #else return false
+        buffer = self._buffer.get_buffer()
+        if string in buffer:
+            return True
+        else:
+            return False
