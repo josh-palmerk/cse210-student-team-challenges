@@ -49,7 +49,7 @@ class Director():
 
         self._get_wordbank()
 
-        self._output_service.open_window("Speed")#self._output_service.open_window("Speed")
+        self._output_service.open_window("Speed")
 
         self._spawn_debug_word() # remove for finished product
 
@@ -81,9 +81,12 @@ class Director():
         for i in range(len(self._current_words) - 1):
             word = self._current_words[i]
             if self._is_dead(word):
-                self._score_board._points -= word.get_points()
+                self._score_board.add_points(-word.get_points())
+                self._current_words.pop(i)
+                if self._score_board.get_points() <= 0:
+                    self._keep_playing = False
             if self._is_contained(word):
-                self._score_board._points += word.get_points()
+                self._score_board.add_points(word.get_points()) 
                 self._current_words.pop(i)
                 self._buffer.clear_buffer()
         
@@ -96,8 +99,6 @@ class Director():
     def _do_outputs(self):
         """uh"""
         self._output_service.clear_screen() #remove this line for free epilepsy
-        
-        #self._output_service.draw_actors(self._current_words.get_all())
         self._output_service.draw_actor(self._score_board)
         self._output_service.draw_actor(self._buffer)
 
