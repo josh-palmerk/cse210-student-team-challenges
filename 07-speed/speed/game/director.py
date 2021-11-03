@@ -37,7 +37,7 @@ class Director():
         self._buffer = Buffer()
         self._word_bank = [] # words.txt
         self._current_words = [] # onscreen words
-        # add more attributes and instances based on game needs
+
 
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -54,7 +54,6 @@ class Director():
         self._spawn_debug_word() # remove for finished product
 
         self._starting_wordspawn()
-
 
         while self._keep_playing:
             self._get_inputs()
@@ -77,6 +76,25 @@ class Director():
         $$$ add points and remove word if typed
         $$$ spawn new words
         """
+        self._kill_checker()
+        
+        self._move_words()
+
+        self._random_spawn()
+
+    def _do_outputs(self):
+        """uh"""
+        self._output_service.clear_screen() #remove this line for free epilepsy
+        self._output_service.draw_actor(self._score_board)
+        self._output_service.draw_actor(self._buffer)
+
+        for word in self._current_words:
+            self._output_service.draw_actor(word)
+        self._output_service.flush_buffer()
+
+
+    def _kill_checker(self):
+        """"""
         q = 0
         for i in range(len(self._current_words)):
             word = self._current_words[q]
@@ -92,22 +110,10 @@ class Director():
                 q -= 1
                 self._buffer.clear_buffer()
             q += 1
-        
+
+    def _move_words(self):
         for word in self._current_words:
             word.move_next()
-
-        self._random_spawn()
-
-
-    def _do_outputs(self):
-        """uh"""
-        self._output_service.clear_screen() #remove this line for free epilepsy
-        self._output_service.draw_actor(self._score_board)
-        self._output_service.draw_actor(self._buffer)
-
-        for word in self._current_words:
-            self._output_service.draw_actor(word)
-        self._output_service.flush_buffer()
 
     def _spawn_word(self):
         """
