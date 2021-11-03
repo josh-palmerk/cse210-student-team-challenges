@@ -1,6 +1,7 @@
 # Any file with the dll file extention
 *.dll
 speed/libraylib.so.2.0.0
-
+libraylib.so.2.0.0
+speed/raylib-2.0.0-Linux-amd64.tar.gz
 # ignoring main so non-windows machines don't get screwed up with the windows
 # solution for raylib not working.
