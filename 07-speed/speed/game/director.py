@@ -75,8 +75,8 @@ class Director():
         $$$ spawn new words
         """
         
-        for i in range(len(self._current_words)):
-            word = self._current_words[i - 1]
+        for i in range(len(self._current_words) - 1):
+            word = self._current_words[i]
             if self._is_dead(word):
                 self._score_board._points -= word.get_points()
             if self._is_contained(word):
