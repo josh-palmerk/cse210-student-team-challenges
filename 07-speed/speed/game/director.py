@@ -74,8 +74,9 @@ class Director():
         $$$ add points and remove word if typed
         $$$ spawn new words
         """
+        
         for i in range(len(self._current_words)):
-            word = self._current_words[i]
+            word = self._current_words[i - 1]
             if self._is_dead(word):
                 self._score_board._points -= word.get_points()
             if self._is_contained(word):
@@ -83,18 +84,22 @@ class Director():
                 self._current_words.pop(i)
                 self._buffer.clear_buffer()
         
+        for word in self._current_words:
+            word.move_next()
+
         self._random_spawn()
 
 
     def _do_outputs(self):
         """uh"""
         self._output_service.clear_screen() #remove this line for free epilepsy
-        # TODO: Uncomment this when you have finished the food class
-        for word in self._current_words:
-            self._output_service.draw_actor(word)
+        
         #self._output_service.draw_actors(self._current_words.get_all())
         self._output_service.draw_actor(self._score_board)
         self._output_service.draw_actor(self._buffer)
+
+        for word in self._current_words:
+            self._output_service.draw_actor(word)
         self._output_service.flush_buffer()
 
     def _spawn_word(self):
@@ -117,11 +122,13 @@ class Director():
             self._spawn_word()
 
     def _get_wordbank(self):
-        base_path = Path(__file__).parent
-        file_path = (base_path / f"../game/words.txt").resolve()
-        with open(file_path, "rt") as infile:
-            for line in infile:
-                self._word_bank.append(line.strip())
+        for word in constants.LIBRARY:
+            self._word_bank.append(word.strip())
+        # base_path = Path(__file__).parent
+        # file_path = (base_path / f"../game/words.txt").resolve()
+        # with open(file_path, "rt") as infile:
+        #     for line in infile:
+        #         self._word_bank.append(line.strip())
 
     def _is_dead(self, word):
         """ returns false if word is not at left side of screen 
