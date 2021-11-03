@@ -51,7 +51,10 @@ class Director():
 
         self._output_service.open_window("Speed")#self._output_service.open_window("Speed")
 
+        self._spawn_debug_word() # remove for finished product
+
         self._starting_wordspawn()
+
 
         while self._keep_playing:
             self._get_inputs()
@@ -135,7 +138,7 @@ class Director():
         TAKES WORD CLASS AS PARAMETER, NOT STRING
         """
         position = word.get_position()
-        if position.get_x() == 0:
+        if position.get_x() <= 2:
             return True
         else:
             return False
@@ -151,3 +154,6 @@ class Director():
             return True
         else:
             return False
+
+    def _spawn_debug_word(self):
+        self._current_words.append(Word("asdf"))

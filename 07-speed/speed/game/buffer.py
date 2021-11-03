@@ -9,7 +9,7 @@ class Buffer(Actor):
         self._typed_string = ""
         self.set_height(constants.DEFAULT_WORD_HEIGHT)
         self.set_width(constants.DEFAULT_FONT_SIZE * len(self._typed_string)) 
-        self.set_position(Point(5, 0))
+        self.set_position(Point((constants.MAX_X / 2), (constants.MAX_Y / 2)))
 
     def clear_buffer(self):
         """Clears the Buffer List"""

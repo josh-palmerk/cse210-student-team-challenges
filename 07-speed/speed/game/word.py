@@ -13,7 +13,7 @@ class Word(Actor):
         self.set_text(f"{self._word}") # word text
 
         self.set_height = constants.DEFAULT_WORD_HEIGHT
-        self.set_position(Point(constants.MAX_X, randint(0, constants.MAX_Y)))
+        self.set_position(Point(constants.MAX_X, randint(constants.DEFAULT_FONT_SIZE, (constants.MAX_Y - (constants.DEFAULT_FONT_SIZE * 2)))))
         self.set_velocity(Point(constants.DEFAULT_WORD_SPEED, 0))
 
     def get_points(self):
