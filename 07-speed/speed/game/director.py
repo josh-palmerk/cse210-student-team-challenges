@@ -118,7 +118,7 @@ class Director():
     def _random_spawn(self):
         """spawns at random based on current points """
         spawn_chance = constants.STARTING_SPAWN_RATE + self._score_board._points
-        if spawn_chance < randint(0, constants.SPAWNRATE_FACTOR):
+        if spawn_chance > randint(0, constants.SPAWNRATE_FACTOR):
             self._spawn_word()
 
     def _get_wordbank(self):
