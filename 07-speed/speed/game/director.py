@@ -106,7 +106,7 @@ class Director():
         """
         adds random instance of Word to (constants.MAX_X)_current_words
         """
-        random_word_index = randint(0, len(self._word_bank))
+        random_word_index = randint(0, len(self._word_bank) - 1)
         random_word = self._word_bank[random_word_index]
         new_word = Word(random_word)
         self._current_words.append(new_word)
