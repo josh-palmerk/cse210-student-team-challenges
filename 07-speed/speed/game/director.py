@@ -10,6 +10,8 @@ from game.word import Word
 
 from game.buffer import Buffer
 
+from game.point import Point
+
 class Director():
     """A code template for a person who directs the game. The responsibility of 
     this class of objects is to control the sequence of play.
@@ -129,11 +131,26 @@ class Director():
             self._spawn_word()
 
     def _random_spawn(self):
-        """spawns at random based on current points """
-        spawn_chance = constants.STARTING_SPAWN_RATE + self._score_board._points
+        """
+        Rolls a random number between 0 and constants.SPAWNRATE_FACTOR. If the spawn_chance is greater
+        than that number, a word is spawned. On top of that, there is a 1 in constants.BONUS_WORD_CHANCE
+        chance that a bonus ord is spawned instead of a regular word.
+        Your spawn_chance is determined by your current point score and the starting spawn rate.
+        If there are no words onscreen, a word is immediately spawned.
+        """
+        spawn_chance = constants.STARTING_SPAWN_RATE + (self._score_board._points * 1.5)
+        will_spawn = False
         if spawn_chance > randint(0, constants.SPAWNRATE_FACTOR):
-            self._spawn_word()
-
+            will_spawn = True
+        elif len(self._current_words) == 0:
+            will_spawn = True
+        
+        if will_spawn:
+            if randint(0, constants.BONUS_WORD_CHANCE) == 0:
+                self._spawn_bonus_word()
+            else:
+                self._spawn_word()
+        
     def _get_wordbank(self):
         for word in constants.LIBRARY:
             self._word_bank.append(word.strip())
@@ -167,3 +184,21 @@ class Director():
 
     def _spawn_debug_word(self):
         self._current_words.append(Word("asdf"))
+
+    def _spawn_bonus_word(self):
+        """bonus word worth triple points with double speed and maybe red color?"""
+        random_word_index = randint(0, len(self._word_bank) - 1)
+        random_word = self._word_bank[random_word_index]
+        bonus_word = Word(random_word)
+
+        # edit bonus word here
+        if randint(0, 3) == 0:
+            bonus_word.set_velocity(Point((constants.DEFAULT_WORD_SPEED * 2.5), 4))
+            bonus_word.set_points(bonus_word.get_points() * 5)
+        else:
+            bonus_word.set_velocity(Point((constants.DEFAULT_WORD_SPEED * 2), 0))
+            bonus_word.set_points(bonus_word.get_points() * 3)
+        # need to add to outputservice to make custom colors and stuff drawable
+
+        self._current_words.append(bonus_word)
+        
