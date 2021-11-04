@@ -42,7 +42,7 @@ class OutputService:
         """
         raylibpy.draw_rectangle(x, y, width, height, raylibpy.BLUE)
 
-    def draw_text(self, x, y, text, is_dark_text):
+    def draw_text(self, x, y, text, is_dark_text, size=constants.DEFAULT_FONT_SIZE):
         """
         Outputs the provided text at the desired location.
         """
@@ -54,7 +54,7 @@ class OutputService:
         raylibpy.draw_text(text,
             x + constants.DEFAULT_TEXT_OFFSET,
             y + constants.DEFAULT_TEXT_OFFSET,
-            constants.DEFAULT_FONT_SIZE,
+            size,
             color)
 
     def draw_actor(self, actor):

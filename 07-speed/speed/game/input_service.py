@@ -1,5 +1,6 @@
 import sys
 from game.point import Point
+from game import constants
 import raylibpy
 
 class InputService:
@@ -19,7 +20,7 @@ class InputService:
         Args:
             self (InputService): An instance of InputService.
         """
-        self._current = Point(10, 0)
+        self._current = Point(constants.SNAKE_VELOCITY, 0)
         
     def get_direction(self):
         """Gets the selected direction. If one hasn't been selected the last 
@@ -33,13 +34,13 @@ class InputService:
         """
         
         if self.is_left_pressed():
-            self._current = Point(-10, 0)
+            self._current = Point(-constants.SNAKE_VELOCITY, 0)
         elif self.is_right_pressed():
-            self._current = Point(10, 0)
+            self._current = Point(constants.SNAKE_VELOCITY, 0)
         elif self.is_up_pressed():
-            self._current = Point(0, -10)
+            self._current = Point(0, -constants.SNAKE_VELOCITY)
         elif self.is_down_pressed():
-            self._current = Point(0, 10)
+            self._current = Point(0, constants.SNAKE_VELOCITY)
 
         return self._current
 
