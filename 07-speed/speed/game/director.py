@@ -1,16 +1,15 @@
 from random import randint
 from pathlib import Path
 import raylibpy
-
 from game import constants
-
 from game.score_board import ScoreBoard
-
 from game.word import Word
-
 from game.buffer import Buffer
-
 from game.point import Point
+from time import sleep
+from game.snake import Snake
+from game.food import Food
+
 
 class Director():
     """A code template for a person who directs the game. The responsibility of 
@@ -41,13 +40,19 @@ class Director():
         self._current_words = [] # onscreen words
 
 
+        #YAY! The snake is back
+        self._food = Food()
+        self._snake = Snake()
+
+
+
     def start_game(self):
         """Starts the game loop to control the sequence of play.
         
         Args:
             self (Director): an instance of Director.
         """
-        print("Starting game...")
+        print("Starting game... with a snake")
 
         self._get_wordbank()
 
@@ -71,6 +76,10 @@ class Director():
         key_press = self._input_service.get_key_press()
         self._buffer.add_character_to_buffer(key_press)
 
+        
+        direction = self._input_service.get_direction()
+        self._snake.turn_head(direction)
+
     def _do_updates(self):
         """
         $$$ check if word reached end of screen
@@ -84,11 +93,21 @@ class Director():
 
         self._random_spawn()
 
+        #Snake?
+        self._snake.move()
+        self._handle_body_collision()
+        self._handle_food_collision()
+
+
     def _do_outputs(self):
         """uh"""
         self._output_service.clear_screen() #remove this line for free epilepsy
         self._output_service.draw_actor(self._score_board)
         self._output_service.draw_actor(self._buffer)
+
+        #SNAKE!
+        self._output_service.draw_actor(self._food)
+        self._output_service.draw_actors(self._snake.get_all())
 
         for word in self._current_words:
             self._output_service.draw_actor(word)
@@ -202,3 +221,59 @@ class Director():
 
         self._current_words.append(bonus_word)
         
+
+
+
+    #SNAAAAAAAAAAAAAANKEEEEEEEEEEEEEEEE!!!!!!!!!!!!!!!
+    def _handle_body_collision(self):
+        """Handles collisions between the snake's head and body. Stops the game 
+        if there is one.
+
+        Args:
+            self (Director): An instance of Director.
+        """
+        head = self._snake.get_head()
+        body = self._snake.get_collidable_segments()
+        for segment in body:
+            if head.get_position().equals(segment.get_position()):
+                self._keep_playing = False
+                break
+
+    def _is_collision(self, first, second):
+        x1 = first.get_position().get_x()
+        y1 = first.get_position().get_y()
+        width1 = first.get_width()
+        height1 = first.get_height()
+
+        rectangle1 = raylibpy.Rectangle(x1, y1, width1, height1)
+
+        x2 = second.get_position().get_x()
+        y2 = second.get_position().get_y()
+        width2 = first.get_width()
+        height2 = first.get_height()
+
+        rectangle2 = raylibpy.Rectangle(x2, y2, width2, height2)
+
+        return raylibpy.check_collision_recs(rectangle1, rectangle2)
+
+    # TODO: Uncomment this when you have finished the food class
+    def _handle_food_collision(self):
+        """Handles collisions between the snake's head and the food. Grows the 
+        snake, updates the score and moves the food if there is one.
+
+        Args:
+        self (Director): An instance of Director.
+        """
+        head = self._snake.get_head()
+        if self._is_collision(head, self._food):
+            # get the amount the food is worth
+            points = self._food.get_points()
+
+            # grow the tail by that much
+            self._snake.grow_tail(points)
+
+            # add to the score
+            self._score_board.add_points(points)
+
+            # get a new food
+            self._food.reset() 

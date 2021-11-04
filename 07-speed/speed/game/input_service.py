@@ -19,7 +19,7 @@ class InputService:
         Args:
             self (InputService): An instance of InputService.
         """
-        # self._current = Point(1, 0)
+        self._current = Point(10, 0)
         
     def get_direction(self):
         """Gets the selected direction. If one hasn't been selected the last 
@@ -32,16 +32,16 @@ class InputService:
             Point: The selected direction.
         """
         
-        # if self.is_left_pressed():
-        #     self._current = Point(-10, 0)
-        # elif self.is_right_pressed():
-        #     self._current = Point(10, 0)
-        # elif self.is_up_pressed():
-        #     self._current = Point(0, -10)
-        # elif self.is_down_pressed():
-        #     self._current = Point(0, 10)
+        if self.is_left_pressed():
+            self._current = Point(-10, 0)
+        elif self.is_right_pressed():
+            self._current = Point(10, 0)
+        elif self.is_up_pressed():
+            self._current = Point(0, -10)
+        elif self.is_down_pressed():
+            self._current = Point(0, 10)
 
-        # return self._current
+        return self._current
 
     def get_key_press(self):
         """

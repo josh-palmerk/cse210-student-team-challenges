@@ -21,3 +21,8 @@ DEFAULT_WORD_SPEED = -1
 STARTING_SPAWN_RATE = 75 
 SPAWNRATE_FACTOR = 13000 # smaller number = more spawns
 BONUS_WORD_CHANCE = 4 # chance is 1 in x
+
+
+"""Hello Snake"""
+SNAKE_LENGTH = 10
+DEFAULT_SQUARE_LENGTH = 20
