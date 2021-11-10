@@ -10,6 +10,8 @@ from game.point import Point
 from time import sleep
 from game.snake import Snake
 from game.food import Food
+from game.life import Life
+
 class Director():
     """A code template for a person who directs the game. The responsibility of 
     this class of objects is to control the sequence of play.
@@ -35,6 +37,7 @@ class Director():
         self._keep_playing = True
         self._score_board = ScoreBoard()
         self._buffer = Buffer()
+        self._life = Life()
         self._word_bank = [] # words.txt
         self._current_words = [] # onscreen words
 
@@ -50,6 +53,7 @@ class Director():
         self._starting_spawn_rate = constants.W_STARTING_SPAWN_RATE
         self._spawnrate_factor = constants.W_SPAWNRATE_FACTOR
         self._bonus_word_chance = constants.W_BONUS_WORD_CHANCE
+        self._lifesnake = constants.W_LIFESNAKE
 
 
 
@@ -80,6 +84,7 @@ class Director():
                 self._keep_playing = False
 
         print("Game over!")
+        print(f"Final Points: {self._score_board.get_points()}")
 
     def _get_inputs(self):
         key_press = self._input_service.get_key_press()
@@ -112,6 +117,7 @@ class Director():
         """uh"""
         self._output_service.clear_screen() #remove this line for free epilepsy
         self._output_service.draw_actor(self._score_board)
+        self._output_service.draw_actor(self._life)
         self._output_service.draw_actor(self._buffer)
 
         #SNAKE!
@@ -131,14 +137,16 @@ class Director():
             word = self._current_words[q]
             if self._is_dead(word):
                 if subtract:
-                    self._score_board.add_points(-word.get_points())
+                    self._life.add_life(-word.get_points())
+                if self._life.get_life() < 0:
+                    print("You ran out of life!")
+                    self._keep_playing = False
+                    break
+                if self._lifesnake:
+                    self._snake.remove_segments(word.get_points())
                 if expire:
                     self._current_words.pop(q)
                     q -= 1
-                if self._score_board.get_points() < 0:
-                    print("You ran out of points!")
-                    self._keep_playing = False
-                    break
             if self._is_contained(word):
                 self._score_board.add_points(word.get_points()) 
                 self._current_words.pop(q)
@@ -255,6 +263,7 @@ class Director():
                     self._starting_spawn_rate = constants.S_STARTING_SPAWN_RATE
                     self._spawnrate_factor = constants.S_SPAWNRATE_FACTOR
                     self._bonus_word_chance = constants.S_BONUS_WORD_CHANCE
+                    self._lifesnake = constants.S_LIFESNAKE
                     self._current_words.pop(-1)
                     start = True
                 elif self._current_words[-1].get_text() == "snake":
@@ -315,6 +324,9 @@ class Director():
 
             # add to the score
             self._score_board.add_points(points)
+
+            # add to life
+            self._life.add_life(points)
 
             # get a new food
             self._food.reset() 

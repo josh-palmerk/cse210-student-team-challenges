@@ -15,15 +15,17 @@ DEFAULT_FONT_SIZE = 22
 DEFAULT_TEXT_OFFSET = 5
 
 
-""" GAme RUles"""
+""" Game Rules"""
 # Snake Rules indicated by S_
 S_SNAKE_IS_ON = True
 S_DO_WORDS_EXPIRE = True
 S_DO_WORDS_SUBTRACT = True
 
-S_STARTING_SPAWN_RATE = 45 
-S_SPAWNRATE_FACTOR = 18000 # smaller number = more spawns
+S_STARTING_SPAWN_RATE = 35 
+S_SPAWNRATE_FACTOR = 20000 # smaller number = more spawns
 S_BONUS_WORD_CHANCE = 4 # chance is 1 in x
+S_LIFESNAKE = True # determines if life is snake or point based
+
 
 # Words Rules indicated by W_
 W_SNAKE_IS_ON = False
@@ -33,6 +35,7 @@ W_DO_WORDS_SUBTRACT = True
 W_STARTING_SPAWN_RATE = 75 
 W_SPAWNRATE_FACTOR = 13000 # smaller number = more spawns
 W_BONUS_WORD_CHANCE = 4 # chance is 1 in x
+W_LIFESNAKE = False # determines if life is snake or point based
 
 
 """ Game Balance """

@@ -140,3 +140,7 @@ class Snake:
             position = Point(x - n, y)
             velocity = Point(1, 0)
             self._add_segment(position, velocity)
+
+    def remove_segments(self, number):
+        for i in range(number):
+            self._segments.pop(-1)
