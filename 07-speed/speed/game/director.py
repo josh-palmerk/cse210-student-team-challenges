@@ -148,7 +148,9 @@ class Director():
                     self._current_words.pop(q)
                     q -= 1
             if self._is_contained(word):
-                self._score_board.add_points(word.get_points()) 
+                self._score_board.add_points(word.get_points())
+                if not self._lifesnake:
+                    self._life.add_life(word.get_points()) 
                 self._current_words.pop(q)
                 q -= 1
                 self._buffer.clear_buffer()

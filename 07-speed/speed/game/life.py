@@ -19,7 +19,7 @@ class Life(Actor):
         """
         super().__init__()
         self._life = 10
-        position = Point(1, 100)
+        position = Point(200, 0)
         self.set_position(position)
         self.set_text(f"Life: {self._life}")
     
